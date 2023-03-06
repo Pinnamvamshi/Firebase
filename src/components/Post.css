@@ -1,0 +1,61 @@
+.main {
+    background-color: #c7edd1;
+    margin: 100px;
+    width: 50%;
+    height: 300px;
+    
+    
+}
+
+label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+input {
+    border: 10px;
+    border-color: #000;
+    border-radius: 2px;
+    width: 50%;
+    height: 50px;
+    margin: 20px;
+}
+
+
+.input1 {
+    border: 10px;
+    border-color: #000;
+    border-radius: 2px;
+    width: 50%;
+    height: 50px;
+    margin: 20px;
+    margin-left: 70px;
+}
+
+.input3 {
+    border: 10px;
+    border-color: #000;
+    border-radius: 2px;
+    width: 50%;
+    height: 50px;
+    margin: 20px;
+    margin-left: 60px;
+}
+
+.title {
+    /* margin-top: 100px; */
+    text-align: center;
+}
+
+.title2 {
+    text-align: center;
+}
+
+.title3 {
+    text-align: center;
+}
+
+button {
+    text-align: center;
+}
