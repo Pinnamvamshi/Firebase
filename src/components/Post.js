@@ -13,7 +13,7 @@ const Post = () => {
     const [imageList, setImageList] = useState("");
     
 
-    const postCollectionRef = collection(db, "PostsTask");
+    const postCollectionRef = collection(db, "Movies");
     const imageListRef = ref(storage, "projectfiles/");
 
     const getPosts = async () => {
@@ -30,54 +30,37 @@ const Post = () => {
         }
     };
 
-    // function to get the image
-    // const getImage = (() => {
-    //     listAll(imageListRef).then((response) => {
-    //         console.log(response);
-    //         response.items.forEach((item) => {
-    //             getDownloadURL(item).then((url) => {
-    //                 setImageList((prev) => [...prev, url]);
-    //             });
-    //         });
-        
-    // }, [])
-    // console.log(imageList)
-    // });
-
-    const getImage = (() => {
-        const imageRef = ref(storage, `projectfiles/${imageUpload.name + uuidv4()}`);
-        getDownloadURL(imageRef).then((url) => {
-            console.log(url);
-            setImageList(url);
-        })
-    });
-
     useEffect(() => {
         getPosts();
-        // getImage();
-    }, []);
+    }, [posts]);
 
     
 
-    
 
     const uploadPost = async () => {
-        try{
-            await addDoc(postCollectionRef, {
-                title: title,
-                description: isdescription,
-                isActive: true,
-                image: imageList,
-            });
-            if (imageUpload == null) return;
-            const imageRef = ref(storage, `projectfiles/${imageUpload.name + uuidv4()}`);
+        
+        try {
+            setTitle("")
+            setIsDescription("")
+            setImageUpload(null)
+            if (imageUpload === null) return;
+            const imageRef = ref(storage, `/projectfiles/${imageUpload.name}`);
             uploadBytes(imageRef, imageUpload).then(() => {
-                alert("Image Uploaded");
+                getDownloadURL(imageRef).then((imageurl) => {
+                    const postCollectionRef = collection(db, "Movies");
+                    addDoc(postCollectionRef, {
+                                    title: title,
+                                    description: isdescription,
+                                    isActive: true,
+                                    image: imageurl,
+                                });
+                })
             })
+
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
   return (
     <div>
       <div className='main'>
@@ -112,17 +95,10 @@ const Post = () => {
                     <h1>Uploaded Posts</h1>
                     <p>{post.title}</p>
                     <p>{post.description}</p>
-                    <img src={post.image} />
+                    <img src={post.image} height="300" width="300" />
                 </div>
             )
         })}
-        {/* {imageList.map((url) => {
-            return (
-                <div>
-                    <img src={url} />
-                </div>
-            )
-        })} */}
       <div>
         
       </div>
