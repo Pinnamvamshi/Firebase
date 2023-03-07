@@ -61,6 +61,10 @@ const Post = () => {
             console.error(err)
         }
     }
+
+    const handleDisablePost = (postId) => {
+        postCollectionRef.ref(`posts/${postId}`).update({ status: 'disabled' });
+      };
   return (
     <div>
       <div className='main'>
@@ -100,6 +104,8 @@ const Post = () => {
             )
         })}
       <div>
+
+        <button onClick={() => handleDisablePost}>Disable Post 1</button>
         
       </div>
     </div>
